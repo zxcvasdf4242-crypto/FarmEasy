@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FARMEASY | Sales Overview</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f1f8e9;
+      color: #2e7d32;
+      padding: 40px;
+    }
+    h1 { text-align: center; }
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #c8e6c9;
+      text-align: left;
+    }
+    th { background: #2e7d32; color: white; }
+    tr:hover { background: #e8f5e9; }
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      color: white;
+      background: #2e7d32;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    a:hover { background: #1b5e20; }
+  </style>
+</head>
+<body>
+  <h1>💰 Sales Overview</h1>
+
+  <% if (!sales || sales.length === 0) { %>
+    <p style="text-align:center;">No sales recorded yet.</p>
+  <% } else { %>
+    <table>
+      <tr>
+        <th>Crop</th>
+        <th>Buyer</th>
+        <th>Quantity (kg)</th>
+        <th>Total (₹)</th>
+        <th>Date</th>
+      </tr>
+      <% sales.forEach(s => { %>
+        <tr>
+          <td><%= s.crop_name %></td>
+          <td><%= s.buyer_name %></td>
+          <td><%= s.quantity %></td>
+          <td><%= s.total_price %></td>
+          <td><%= s.created_at.toLocaleDateString() %></td>
+        </tr>
+      <% }) %>
+    </table>
+  <% } %>
+
+  <div style="text-align:center;">
+    <a href="/">⬅ Back to Home</a>
+  </div>
+</body>
+</html>

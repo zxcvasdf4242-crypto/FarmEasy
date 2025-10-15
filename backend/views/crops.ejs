@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FARMEASY | My Crops</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f1f8e9;
+      margin: 0;
+      color: #2e7d32;
+    }
+
+    header {
+      background: #2e7d32;
+      color: white;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 { margin: 0; font-size: 1.8rem; }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 15px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      text-decoration: underline;
+      transform: scale(1.05);
+    }
+
+    main {
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 { text-align: center; margin-bottom: 20px; }
+
+    table {
+      border-collapse: collapse;
+      width: 90%;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: center;
+      border-bottom: 1px solid #c8e6c9;
+    }
+
+    th {
+      background: #2e7d32;
+      color: white;
+    }
+
+    tr:hover {
+      background: #e8f5e9;
+    }
+
+    .btn {
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .view-btn {
+      background: #66bb6a;
+      color: white;
+    }
+    .edit-btn {
+      background: #ffee58;
+      color: #2e7d32;
+    }
+    .delete-btn {
+      background: #ef5350;
+      color: white;
+    }
+
+    .btn:hover {
+      transform: scale(1.08);
+      opacity: 0.9;
+    }
+
+    .add-crop {
+      background: #2e7d32;
+      color: white;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      margin-top: 25px;
+      display: inline-block;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .add-crop:hover { background: #1b5e20; transform: scale(1.05); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌾 FARMEASY</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/profile/<%= farmer.id %>">Profile</a>
+      <a href="/sales/<%= farmer.id %>">Sales</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>🌱 My Crops</h2>
+
+    <% if (!crops || crops.length === 0) { %>
+      <p>No crops added yet.</p>
+    <% } else { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Crop Name</th>
+            <th>Category</th>
+            <th>Quantity (kg)</th>
+            <th>Price per kg (₹)</th>
+            <th>Remaining (kg)</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% crops.forEach(c => { %>
+            <tr>
+              <td><%= c.name %></td>
+              <td><%= c.category %></td>
+              <td><%= c.quantity_kg %></td>
+              <td><%= c.price_per_kg %></td>
+              <td><%= c.remaining_qty || c.quantity_kg %></td>
+              <td>
+                <button class="btn view-btn">View</button>
+                <button class="btn edit-btn">Edit</button>
+                <button class="btn delete-btn">Delete</button>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } %>
+
+    <a class="add-crop" href="/add-crop?farmer_id=<%= farmer.id %>">+ Add New Crop</a>
+  </main>
+</body>
+</html>

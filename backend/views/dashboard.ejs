@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FARMEASY | Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f8f4;
+      color: #2e7d32;
+    }
+    header {
+      background-color: #2e7d32;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+    }
+    header h1 { font-size: 1.8rem; margin: 0; }
+    nav button {
+      background: white;
+      color: #2e7d32;
+      border: none;
+      padding: 10px 18px;
+      margin-left: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+    nav button:hover { background: #1b5e20; color: white; transform: scale(1.05); }
+    main {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 20px;
+      padding: 40px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+    .card:hover { transform: scale(1.02); }
+    .profile-photo {
+      width: 100px; height: 100px; border-radius: 50%; object-fit: cover;
+    }
+    h3 { margin-top: 0; }
+    ul { list-style: none; padding-left: 0; }
+    li { padding: 6px 0; border-bottom: 1px solid #c8e6c9; }
+    button.add-btn {
+      background: #2e7d32;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+    button.add-btn:hover { background: #1b5e20; transform: scale(1.05); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌾 FARMEASY Dashboard</h1>
+    <nav>
+      <button onclick="window.location.href='/profile/<%= farmer.id %>'">Profile</button>
+      <button onclick="window.location.href='/crops/<%= farmer.id %>'">My Crops</button>
+      <button onclick="window.location.href='/sales/<%= farmer.id %>'">Sales</button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="card">
+      <h3>👨‍🌾 Farmer Profile</h3>
+      <img src="<%= farmer.photo || '/static/default.jpg' %>" class="profile-photo" alt="Profile Photo">
+      <p><strong>Name:</strong> <%= farmer.name %></p>
+      <p><strong>State:</strong> <%= farmer.state %></p>
+      <p><strong>Email:</strong> <%= farmer.email %></p>
+      <p><strong>Phone:</strong> +91 <%= farmer.phone %></p>
+      <button class="add-btn" onclick="window.location.href='/profile/<%= farmer.id %>'">Edit Profile</button>
+    </div>
+
+    <div>
+      <div class="card">
+        <h3>🌱 Crops Summary</h3>
+        <% if (!crops || crops.length === 0) { %>
+          <p>No crops added yet.</p>
+        <% } else { %>
+          <ul>
+            <% crops.forEach(c => { %>
+              <li><strong><%= c.name %></strong> — <%= c.remaining_qty %> kg left</li>
+            <% }) %>
+          </ul>
+        <% } %>
+        <button class="add-btn" onclick="window.location.href='/add-crop?farmer_id=<%= farmer.id %>'">+ Add Crop</button>
+      </div>
+
+      <div class="card">
+        <h3>💰 Sales Overview</h3>
+        <p>Total Sales: <strong><%= sales.total_sales || 0 %></strong></p>
+        <button class="add-btn" onclick="window.location.href='/sales/<%= farmer.id %>'">View Sales Details</button>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

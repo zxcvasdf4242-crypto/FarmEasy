@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Crop | FARMEASY</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #66bb6a, #43a047);
+      color: white;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden;
+    }
+    h2 {
+      margin-top: 60px;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      animation: fadeDown 1s ease forwards;
+    }
+    @keyframes fadeDown {
+      from { transform: translateY(-30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    form {
+      background: rgba(255,255,255,0.1);
+      padding: 30px;
+      border-radius: 15px;
+      width: 420px;
+      margin: 50px auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      backdrop-filter: blur(8px);
+      animation: fadeIn 1s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    label {
+      display: block;
+      font-size: 1.1rem;
+      text-align: left;
+      margin-top: 10px;
+      margin-left: 10px;
+    }
+    input {
+      width: 90%;
+      padding: 12px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+    }
+    input:focus {
+      box-shadow: 0 0 5px #2e7d32;
+    }
+    button {
+      margin-top: 15px;
+      padding: 15px 30px;
+      background: white;
+      color: #2e7d32;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    button:hover {
+      transform: scale(1.08);
+      background: #2e7d32;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h2>🌾 Add Your Crop</h2>
+  <form method="POST" action="/add-crop">
+    <input type="hidden" name="farmer_id" value="<%= farmer_id || '' %>">
+
+    <label>Crop Name</label>
+    <input name="name" id="cropName" placeholder="e.g., Wheat, Rice" required>
+
+    <label>Category</label>
+    <input name="category" id="category" placeholder="Auto-detected..." readonly>
+
+    <label>Quantity (kg)</label>
+    <input name="quantity_kg" placeholder="Enter quantity" required>
+
+    <label>Price per kg (₹)</label>
+    <input name="price_per_kg" placeholder="Enter price" required>
+
+    <button type="submit">Add Crop</button>
+  </form>
+
+  <script>
+    // Fade-in transition
+    document.body.style.opacity = 0;
+    document.body.style.transition = "opacity 1.2s ease";
+    window.onload = () => { document.body.style.opacity = 1; };
+
+    // Auto-detect category based on crop name
+    const cropInput = document.getElementById('cropName');
+    const categoryInput = document.getElementById('category');
+
+    cropInput.addEventListener('input', () => {
+      const name = cropInput.value.toLowerCase();
+      if (name.includes('wheat') || name.includes('rice') || name.includes('maize')) categoryInput.value = 'Grain';
+      else if (name.includes('mango') || name.includes('banana') || name.includes('apple')) categoryInput.value = 'Fruit';
+      else if (name.includes('tomato') || name.includes('potato') || name.includes('onion')) categoryInput.value = 'Vegetable';
+      else if (name.includes('cotton') || name.includes('jute')) categoryInput.value = 'Fiber Crop';
+      else if (name.includes('sugarcane')) categoryInput.value = 'Cash Crop';
+      else categoryInput.value = 'Other';
+    });
+  </script>
+</body>
+</html>

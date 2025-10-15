@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FARMEASY</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #4caf50, #8bc34a);
+      color: white;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+    h1 {
+      font-size: 5rem;
+      margin-top: 20vh;
+      letter-spacing: 8px;
+      opacity: 0;
+      transform: scale(0.8);
+      animation: fadeInZoom 2s ease forwards;
+    }
+    @keyframes fadeInZoom {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 15px 30px;
+      background: white;
+      color: #388e3c;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .btn:hover {
+      background: #2e7d32;
+      color: white;
+    }
+    footer {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌾 FARMEASY</h1>
+  <a href="/register" class="btn">Register Farmer</a>
+  <footer>Empowering Farmers • Connecting Consumers</footer>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FARMEASY | Profile</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #e8f5e9;
+      color: #2e7d32;
+      padding: 40px;
+    }
+    h1 { text-align: center; }
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      width: 500px;
+      margin: 40px auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    label { display: block; margin-top: 10px; font-weight: 600; }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #a5d6a7;
+      margin-top: 5px;
+    }
+    button {
+      background: #2e7d32;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+    button:hover { background: #1b5e20; transform: scale(1.05); }
+  </style>
+</head>
+<body>
+  <h1>👨‍🌾 Farmer Profile</h1>
+  <div class="card">
+    <p><strong>Name:</strong> <%= farmer.name %></p>
+    <p><strong>Phone:</strong> +91 <%= farmer.phone %></p>
+    <p><strong>Email:</strong> <%= farmer.email %></p>
+    <p><strong>State:</strong> <%= farmer.state %></p>
+    <p><strong>Address:</strong> <%= farmer.address %></p>
+
+    <h3>📖 Add More Info (coming soon)</h3>
+    <label>Age</label>
+    <input placeholder="Enter your age" />
+    <label>Experience (years)</label>
+    <input placeholder="Years of farming experience" />
+    <label>Backstory</label>
+    <textarea rows="3" placeholder="Share your farming story..."></textarea>
+    <button>Save</button>
+  </div>
+</body>
+</html>
